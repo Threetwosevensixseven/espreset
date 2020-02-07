@@ -1,0 +1,27 @@
+ZeusBak
+/build/*.pdb
+/build/*.vshost.*
+/build/*.exe.*
+bin
+obj
+*.suo
+*.user
+/fw/ESP8266_FULL_V3.3_SPUGS/.idea
+/fw/ESP8266_FULL_V3.3_SPUGS/venv
+/fw/ESP8266_FULL_V3.3_SPUGS/venv1
+~*.xlsx
+/dot/ESPUPDATE (Garry turbo test).piz
+/dot/ESPUPDATE (Garry turbo test).zip
+/build/get-tools.ps1
+/dot/*.piz
+/diff
+/build/zeus*.*
+/build/keymap.dat
+/fw/ESP8266_FULL_V3.3_SPUGS/ESP8266_stub_flashsize.bin
+/fw/ESP8266_FULL_V3.3_SPUGS/ESP8266_FULL_V3.3_SPUGS.zip
+/src/netstd/packages
+/log
+
+/fw/ESP Firmware
+/fw/dot
+*.piz
