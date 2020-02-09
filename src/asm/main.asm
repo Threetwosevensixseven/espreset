@@ -31,7 +31,7 @@ Main                    proc                            ; Dot commands always st
 Begin:                  di                              ; We run with interrupts off apart from printing and halts
                         ld (Return.Stack1), sp          ; Save so we can always return without needing to balance stack
                         ld (Return.IY1), iy             ; Put IY safe, just in case
-                        ld sp, $4000                    ; Put stack safe inside dot comman
+                        ld sp, $4000                    ; Put stack safe inside dot command
 
                         ld (SavedArgs), hl              ; Save args for later
 
@@ -54,13 +54,6 @@ Begin:                  di                              ; We run with interrupts
                         cp 8                            ; Exit with error if not a Next. HL still points to err message,
                         jp nz, Return.WithCustomError   ; be careful if adding code between the Next check and here!
 IsANext:
-                        Rst8(M_DOSVERSION)              ; Check if we are running in NextZXOS
-                        ld hl, Err.NotOS                ; If esxDOS (carry set),
-                        jp c, Return.WithCustomError    ; exit with an error.
-                        or a                            ; If not full NextZXOS (a != 0),
-                        ld hl, Err.NotNB                ; exit with an error.
-                        jp nz, Return.WithCustomError   ; We could also do NextZXOS version check if we cared.
-
                         NextRegRead(Reg.Peripheral2)    ; Read Peripheral 2 register.
                         ld (RestoreF8.Saved), a         ; Save current value so it can be restored on exit.
                         and %0111 1111                  ; Clear the F8 enable bit,
@@ -97,14 +90,11 @@ DoHelp:                 PrintMsg(Msg.Help)
                         endif
 NoHelp:
 
-
-
-
-
-
-
-
-
+Reset:                  PrintMsg(Msg.Resetting)                 ; "Resetting ESP..."
+                        call ResetESP
+                        PrintMsg(Msg.Flushing)                  ; "Flushing UART..."
+                        call ESPFlush
+                        PrintMsg(Msg.Done)
 
                         if enabled ErrDebug
                           ; This is a temporary testing point that indicates we have have reached
@@ -114,7 +104,6 @@ NoHelp:
                         else
                           ; This is the official "success" exit point of the program which restores
                           ; all the settings and exits to BASIC cleanly.
-                          PrintMsg(Msg.Success)
                           jp Return.ToBasic
                         endif
 pend

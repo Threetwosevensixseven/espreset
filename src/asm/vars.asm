@@ -25,7 +25,3 @@ WantsHelp:              ds 1
 ; UART
 Prescaler:              ds 3
 
-; ESP
-Buffer:                 ds 2048
-BufferLen               equ $-Buffer
-

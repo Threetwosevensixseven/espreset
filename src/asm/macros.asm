@@ -166,9 +166,3 @@ SetUARTBaud             macro(BaudTable, BaudMsg)       ; Parameterised wrapper 
                         call SetUARTBaudProc
 mend
 
-ESPSendBytes            macro(BufferStart, BufferLength) ; Parameterised wrapper for ESP send routine
-                        ld hl, BufferStart
-                        ld de, BufferLength
-                        call ESPSendBytesProc
-mend
-

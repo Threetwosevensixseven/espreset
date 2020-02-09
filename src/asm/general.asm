@@ -90,7 +90,27 @@ Loop:                   halt                            ; Note that we already h
                         or c
                         jr nz, Loop                     ; Wait for BC frames
                         di                              ; In this dot cmd interrupts are off unless waiting or printing
-SavedStack equ $+1:     ld sp, SMC                      ; Restore stack
+                        ld sp, [SavedStack]SMC          ; Restore stack
+                        ret
+pend
+
+WaitKey                 proc                            ; Just a debugging routine that allows me to clear
+                        Border(6)                       ; my serial logs at a certain point, before logging
+                        ei                              ; the traffic I'm interested in debugging.
+Loop1:                  xor a
+                        in a, ($FE)
+                        cpl
+                        and 15
+                        halt
+                        jr nz, Loop1
+Loop2:                  xor a
+                        in a, ($FE)
+                        cpl
+                        and 15
+                        halt
+                        jr z, Loop2
+                        Border(7)
+                        di
                         ret
 pend
 
@@ -167,11 +187,13 @@ pend
 
 ParseHelp               proc
                         ret nc                          ; Return immediately if no arg found
+                        push af
+                        push bc
+                        push hl
                         ld a, b
                         or c
                         cp 2
-                        ret nz
-                        push hl
+                        jr nz, Return
                         ld hl, ArgBuffer
                         ld a, (hl)
                         cp '-'
@@ -183,6 +205,8 @@ ParseHelp               proc
                         ld a, 1
                         ld (WantsHelp), a
 Return:                 pop hl
+                        pop bc
+                        pop af
                         ret
 pend
 
