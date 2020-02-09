@@ -28,6 +28,7 @@ pskill.exe -t cspect.exe
 hdfmonkey.exe put C:\spec\cspect-next-2gb.img ..\dot\espreset dot
 hdfmonkey.exe put C:\spec\cspect-next-2gb.img ..\dot\espreset dot\extra
 hdfmonkey.exe put C:\spec\cspect-next-2gb.img autoexec.bas nextzxos\autoexec.bas
+hdfmonkey.exe put C:\spec\cspect-next-2gb.img terminal-a.bas demos\uart\terminal-a.bas
 cd C:\spec\CSpect2_12_1
 CSpect.exe -w2 -zxnext -nextrom -basickeys -exit -brk -tv %serarg%-mmc=..\cspect-next-2gb.img
 :NoCSpect

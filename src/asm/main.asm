@@ -91,6 +91,7 @@ DoHelp:                 PrintMsg(Msg.Help)
 NoHelp:
 
 Reset:                  PrintMsg(Msg.Resetting)                 ; "Resetting ESP..."
+                        //call WaitKey
                         call ResetESP
                         PrintMsg(Msg.Flushing)                  ; "Flushing UART..."
                         call ESPFlush

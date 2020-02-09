@@ -94,26 +94,6 @@ Loop:                   halt                            ; Note that we already h
                         ret
 pend
 
-WaitKey                 proc                            ; Just a debugging routine that allows me to clear
-                        Border(6)                       ; my serial logs at a certain point, before logging
-                        ei                              ; the traffic I'm interested in debugging.
-Loop1:                  xor a
-                        in a, ($FE)
-                        cpl
-                        and 15
-                        halt
-                        jr nz, Loop1
-Loop2:                  xor a
-                        in a, ($FE)
-                        cpl
-                        and 15
-                        halt
-                        jr z, Loop2
-                        Border(7)
-                        di
-                        ret
-pend
-
 ; ***************************************************************************
 ; * Parse an argument from the command tail                                 *
 ; ***************************************************************************
@@ -209,4 +189,26 @@ Return:                 pop hl
                         pop af
                         ret
 pend
+
+/*
+WaitKey                 proc                            ; Just a debugging routine that allows me to clear
+                        Border(6)                       ; my serial logs at a certain point, before logging
+                        ei                              ; the traffic I'm interested in debugging.
+Loop1:                  xor a
+                        in a, ($FE)
+                        cpl
+                        and 15
+                        halt
+                        jr nz, Loop1
+Loop2:                  xor a
+                        in a, ($FE)
+                        cpl
+                        and 15
+                        halt
+                        jr z, Loop2
+                        Border(7)
+                        di
+                        ret
+pend
+*/
 
