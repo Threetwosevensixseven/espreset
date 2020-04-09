@@ -119,7 +119,7 @@ pend
 Length       equ $-Main
 zeusprinthex "Dot Cmd: ", zeusmmu(DotCommand8KBank), Length
 
-zeusassert zeusver<=75, "Upgrade to Zeus v4.00 (TEST ONLY) or above, available at http://www.desdes.com/products/oldfiles/zeustest.exe"
+zeusassert zeusver>=74, "Upgrade to Zeus v4.00 (TEST ONLY) or above, available at http://www.desdes.com/products/oldfiles/zeustest.exe"
 
 if (Length > $2000)
   zeuserror "Dot command is too large to assemble!"
